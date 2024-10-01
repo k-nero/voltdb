@@ -1488,7 +1488,7 @@ if __name__ == '__main__':
                    html - generate html files of the leaderboards
             """
     if not jenkinsbot.connect_to_slack():
-        print 'Not able to connect to Slack. Is the "token" environment variable set?'
+        print ('Not able to connect to Slack. Is the "token" environment variable set?')
         sys.exit(1)
     if len(sys.argv) == 2:
         if sys.argv[1] == 'listen':
@@ -1534,8 +1534,8 @@ if __name__ == '__main__':
             #jenkinsbot.generate_html([core_table], 'core-junit-leaderboard.html', 'Leaderboard updated at http://ci.voltdb.lan/job/leaderboards/lastSuccessfulBuild/artifact/core-junit-leaderboard.html')
             #jenkinsbot.generate_html([system_table], 'systems-master-leaderboard.html', 'Leaderboard updated at http://ci.voltdb.lan/job/leaderboards/lastSuccessfulBuild/artifact/systems-master-leaderboard.html')
         else:
-            print 'Command %s not found' % sys.argv[1]
-            print help_text
+            print ('Command %s not found' % sys.argv[1])
+            print (help_text)
     else:
-        print 'Incorrect number of arguments'
-        print help_text
+        print ('Incorrect number of arguments')
+        print (help_text)

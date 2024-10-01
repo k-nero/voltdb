@@ -48,7 +48,7 @@ if __name__ == '__main__':
                     for p in affectedPaths:
                         for pat in patterns:
                             if fnmatch(p, pat):
-                                print p, pat
+                                print (p, pat)
                                 result = 0
                                 break
                     sys.exit(result)

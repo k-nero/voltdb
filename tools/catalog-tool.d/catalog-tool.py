@@ -42,12 +42,12 @@ def extract_catalog(runner, catalog_old):
     tempdir = get_temp_directory()
     try:
         catalog_zip_in = zipfile.ZipFile(catalog_old, 'r')
-    except (IOError, OSError), e:
+    except (IOError, OSError) as  e:
         runner.abort('Failed to open input catalog jar "%s".' % catalog_old)
     try:
         try:
             catalog_zip_in.extractall(tempdir)
-        except (IOError, OSError), e:
+        except (IOError, OSError) as  e:
             runner.abort('Failed to extract catalog jar "%s".' % catalog_old, e)
     finally:
         catalog_zip_in.close()
@@ -57,7 +57,7 @@ def extract_catalog(runner, catalog_old):
 def compress_catalog(runner, catalog_new, tempdir):
     try:
         catalog_zip_out = zipfile.ZipFile(catalog_new, 'w', zipfile.ZIP_DEFLATED)
-    except (IOError, OSError), e:
+    except (IOError, OSError) as  e:
         runner.abort('Failed to open output catalog jar "%s".' % catalog_new)
     try:
         savedir = os.getcwd()
@@ -67,7 +67,7 @@ def compress_catalog(runner, catalog_new, tempdir):
                 for root, dirs, files in os.walk('.'):
                     for f in files:
                         catalog_zip_out.write(os.path.join(root, f))
-            except (IOError, OSError), e:
+            except (IOError, OSError) as  e:
                 runner.abort('Failed to compress catalog jar "%s".' % catalog_new, e)
         finally:
             catalog_zip_out.close()
@@ -82,17 +82,17 @@ def patch_buildinfo(runner, buildinfo_in, version_new):
         runner.abort('"%s" not found.' % buildinfo_in)
     try:
         shutil.copy(buildinfo_in, buildinfo_orig)
-    except (IOError, OSError), e:
+    except (IOError, OSError) as  e:
         runner.abort('Failed to backup "%s" to "%s".'
                         % (buildinfo_in, buildinfo_orig), e)
     try:
         f_in = open(buildinfo_in, 'r')
-    except (IOError, OSError), e:
+    except (IOError, OSError) as  e:
         runner.abort('Failed to open input file "%s".' % buildinfo_in)
     try:
         try:
             f_out = open(buildinfo_out, 'w')
-        except (IOError, OSError), e:
+        except (IOError, OSError) as  e:
             runner.abort('Failed to open output file "%s".' % buildinfo_out)
         try:
             nline = 0
@@ -108,7 +108,7 @@ def patch_buildinfo(runner, buildinfo_in, version_new):
         f_in.close()
     try:
         shutil.move(buildinfo_out, buildinfo_in)
-    except (IOError, OSError), e:
+    except (IOError, OSError) as  e:
         runner.abort('Failed to move "%s" to "%s".'
                         % (buildinfo_out, buildinfo_in), e)
 
@@ -138,11 +138,11 @@ def iter_catalog_dump(runner, path, all):
                                            m.group(5)))
                         else:
                             yield line
-            except Exception, e:
+            except Exception as  e:
                 runner.error(e)
         finally:
             zipf.close()
-    except (IOError, OSError), e:
+    except (IOError, OSError) as  e:
         runner.abort('Unable to open catalog "%s".' % path, e)
 
 
@@ -167,7 +167,7 @@ def dump_to_file(runner, path_in, path_out):
 )
 def dump(runner):
     for line in iter_catalog_dump(runner, runner.opts.catalog_path, runner.opts.all):
-        print line
+        print (line)
 
 
 @VOLT.Command(
@@ -220,5 +220,5 @@ def diff(runner):
         if not runner.opts.keep:
             shutil.rmtree(tempdir)
         else:
-            print '\n'
+            print ('\n')
             runner.info('Dump files can be found in "%s".' % tempdir)

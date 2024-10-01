@@ -81,4 +81,7 @@ tools/ee/ee_auto_generated_unit_tests
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/modules.xml
-
+.idea/discord.xml
+.idea/editor.xml
+/cmake-build-debug/
+/build/

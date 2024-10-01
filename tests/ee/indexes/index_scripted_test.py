@@ -26,7 +26,7 @@ from subprocess import Popen, PIPE
 import os
 import sys
 import argparse
-print sys.path[0]
+print (sys.path[0])
 
 script = """
 # setup commands:

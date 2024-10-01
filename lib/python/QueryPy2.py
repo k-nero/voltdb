@@ -34,7 +34,7 @@ try:
     from voltdbclientp2 import ReadBuffer, VoltColumn, VoltTable, VoltException, VoltResponse, VoltProcedure
     supportSSL = True
 except ImportError:
-    print "Import errors. No sslutils."
+    print ("Import errors. No sslutils.")
     from voltdbclientpy2 import ReadBuffer, VoltColumn, VoltTable, VoltException, VoltResponse, VoltProcedure, FastSerializer
     supportSSL = False
 
@@ -126,7 +126,7 @@ class VoltQueryClient(cmd.Cmd):
 
         try:
             return proc.call(params, response, timeout)
-        except IOError, err:
+        except IOError as err:
             self.safe_print("Error: %s" % (err))
             if not response:
                 raise
@@ -167,7 +167,7 @@ class VoltQueryClient(cmd.Cmd):
         if not self.__quiet:
             for i in var:
                 if i != None:
-                    print i,
+                    print(i),
             print
 
     def set_quiet(self, quiet):
@@ -252,7 +252,7 @@ Get the statistics:
                                              [args[0], args[1], int(args[2])],
                                              timeout = self.__timeout)
         else:
-            print args
+            print(args)
             self.response = self.__safe_call(self.snapshotsavejson,
                                              args,
                                              timeout = self.__timeout)
@@ -484,14 +484,14 @@ Get the statistics:
                         self.safe_print(strerr)
                    """ % (method_name, parsed[0], proc_name, proc_name)
             tmp = {}
-            exec code.strip() in tmp
+            exec(code.strip() in tmp)
             setattr(self.__class__, "do_" + parsed[0], tmp[method_name])
 
             setattr(self.__class__, proc_name,
                     VoltProcedure(self.fs, parsed[0],
                                   [self.__class__.TYPES[i]
                                    for i in parsed[1:]]))
-        except KeyError, strerr:
+        except KeyError as strerr:
             self.safe_print("Unsupported type", strerr)
             self.help_define()
 
@@ -503,7 +503,7 @@ Get the statistics:
         self.safe_print("Supported types", self.__class__.TYPES.keys())
 
 def help(program_name):
-    print program_name, "hostname port [dump=filename] [command]"
+    print(program_name, "hostname port [dump=filename] [command]")
 
 if __name__ == "__main__":
     # TODO Add SSL arguments to command line & its help

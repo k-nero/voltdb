@@ -102,6 +102,7 @@ public class Log4jSocketHandlerImporter extends AbstractImporter
         }
     }
 
+    @SuppressWarnings("unused")
     private void printCreateTableError()
     {
             System.err.println("Log event table must exist before Log4j socket importer can be used");

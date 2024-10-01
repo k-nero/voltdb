@@ -69,7 +69,7 @@ def sendSMS(toPhone):
     message = client.messages.create(body="Twilio test message <3",
         to=checkPhoneNum(toPhone),
         from_="+16173963192") # My Twilio number
-    print message.sid
+    print (message.sid)
 
 def processRow(row):
     """ For each row, check notify flag and process accordingly:
@@ -88,11 +88,11 @@ def processRow(row):
             updateHTML(ctime(int(row["ExportTime"][0])/1000), row["Name"][0], row["Phone"][0], "Complete")
             # print "text message sent to %s" % row["Phone"][0]
         else:
-            print "Not notified"
+            print ("Not notified")
     except KeyError as err:
-        print "Exception: key %s not in GET query string." % err
+        print ("Exception: key %s not in GET query string." % err)
     except:
-        print "Unknown exception in processRow"
+        print( "Unknown exception in processRow")
 
 def htmlRows(environ, start_response):
     start_response('200 OK', [('Content-Type', 'text/html')])
